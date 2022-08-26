@@ -32,7 +32,9 @@ credentials: 'include'
 const port = parseInt(process.env.PORT) || 4000;
 app.use(cors(), express.json(), cookieParser(), bodyParser.urlencoded({ extended: true}));
 app.listen(port, ()=> {console.log(`Server is running on port ${port}`)});
-
+app.get('/', (req, res)=> {
+    res.status(200).json({msg: "Well done"});
+})
 const productsRoute = require("./routes/productsRoute")
 app.use("/products", productsRoute);
 
