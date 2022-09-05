@@ -76,4 +76,33 @@ router.patch('/', bodyParser.json(), (req, res) => {
     }
 });
 
+router.post("/", bodyParser.json(), (req, res) => {
+    try{
+        const strQry = `SELECT * FROM users WHERE userEmail = ?`
+
+        con.query(strQry, req.body.userEmail, (err, results) => {
+            if(err) throw err;
+            if (results.length>0 ) {
+                res.json({
+                    msg: "email already exists"
+                })
+            } else {
+                const insertstrQry = `INSERT INTO users (userName, userPassword, userEmail, userRole) VALUES (?,?,?,?)`
+
+                con.query(insertstrQry, [req.body.userName, req.body.userPassword, req.body.userEmail, req.body.userRole], (err, insertResults) => {
+                    if(err) throw err;
+                    if (insertResults.length>0) {
+                      res.json({
+                        msg: "register successful "
+                    })  
+                    }
+                
+                } )
+            }
+        })
+    }catch(e) {
+        res.status(400).json({err: e.message})
+    }
+})
+
 module.exports = router
