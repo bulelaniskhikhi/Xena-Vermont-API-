@@ -61,4 +61,23 @@ router.get("/rating/:esrbRating", (req, res) => {
     }
 });
 
+router.get("/genre/:genre", (req, res) => {
+    try{
+        const strQry = `SELECT * FROM products WHERE genre = ?`;
+
+        con.query(strQry, req.params.genre, (err, results) => {
+            if (err) throw err;
+
+            res.json({
+                results: results,
+                msg: "1 Product Shown",
+            });
+        });
+    } catch (error) {
+        res.status(400).json({
+            error
+        })
+    }
+});
+
 module.exports = router
