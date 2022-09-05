@@ -46,7 +46,7 @@ router.get("/rating/:esrbRating", (req, res) => {
     try{
         const strQry = `SELECT * FROM products WHERE esrbRating = ?`;
 
-        con.query(strQry, (err, results) => {
+        con.query(strQry, req.params.esrbRating, (err, results) => {
             if (err) throw err;
 
             res.json({
