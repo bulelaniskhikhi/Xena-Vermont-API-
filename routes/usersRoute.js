@@ -76,27 +76,26 @@ router.patch('/', bodyParser.json(), (req, res) => {
     }
 });
 
-router.post("/", bodyParser.json(), (req, res) => {
+router.post("/", bodyParser.json(), async (req, res) => {
     try{
         const strQry = `SELECT * FROM users WHERE userEmail = ?`
 
-        con.query(strQry, req.body.userEmail, (err, results) => {
+        con.query(strQry, req.body.userEmail, async (err, results) => {
             if(err) throw err;
             if (results.length>0 ) {
                 res.json({
                     msg: "email already exists"
                 })
             } else {
+                req.body.userPassword= await bcrypt.hash(req.body.userPassword, 10)
                 const insertstrQry = `INSERT INTO users (userName, userPassword, userEmail, userRole) VALUES (?,?,?,?)`
 
                 con.query(insertstrQry, [req.body.userName, req.body.userPassword, req.body.userEmail, req.body.userRole], (err, insertResults) => {
                     if(err) throw err;
-                    if (insertResults.length>0) {
-                      res.json({
+            
+                res.json({
                         msg: "register successful "
-                    })  
-                    }
-                
+                    }) 
                 } )
             }
         })
