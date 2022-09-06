@@ -61,13 +61,15 @@ router.patch('/', bodyParser.json(), (req, res) => {
                     })
                 }
             })
-        }
-
-
-          res.json({
+        }else {
+            res.json({
               results: results,
               msg: "All Users Shown",
           });
+        }
+
+
+          
       });
     } catch (error) {
         res.status(400).json({
