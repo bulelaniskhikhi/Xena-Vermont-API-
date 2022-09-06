@@ -54,6 +54,12 @@ router.patch('/', bodyParser.json(), (req, res) => {
         if (results.length>0) {
             bcrypt.compare(req.body.userPassword, results[0].userPassword, (err, check) => {
                 if (check) {
+                    const payload = {
+                        userName: results[0].userName,
+                        userEmail: results[0].userName,
+                        userPassword: results[0].userPassword,
+                        userRole: results[0].userRole,
+                    }
                     jwt.sign(results[0], process.env.jwtSecret, (err, wd) =>{
                        res.json({
                            token: wd
