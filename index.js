@@ -19,7 +19,7 @@ app.use((req, res, next)=>{
     next();
 });
 app.use(cors({
-    origin: ['http://127.0.0.1:8000', 'http://localhost:8000'],
+    origin: ['https://xena-vermont-api.herokuapp.com'],
     credentials: true
 }));
 

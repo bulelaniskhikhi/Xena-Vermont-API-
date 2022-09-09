@@ -12,10 +12,28 @@
             <div style=" display: flex; justify-content: center;">
                 <h1>Welcome to Xena Vermont</h1>
             </div>
-
-            <div style=" display: flex; justify-content: center;">
-                <img style="width: 50%; height: auto" src="https://i.postimg.cc/1z5Gz6CJ/berserk-eclipse-berserk-femto.gif" alt="">
-            </div>
+            <style>
+                ul {
+                    list-style: none;
+                    font-size: 1.15em;
+                }
+        
+                li {
+                    display: flex;
+                    width: 275px;
+                    margin: 2.5px 2.5px 2.5px 2.5px;
+                    justify-content: space-between;
+                }
+            </style>
+        
+            <h2>products route:</h2>
+            <ul>
+                <li><span>GET</span> <span>/products</span></li>
+                <li><span>GET</span> <span>/products/:id</span></li>
+                <li><span>POST</span> <span>/products</span></li>
+                <li><span>PUT</span> <span>/products/:id</span></li>
+                <li><span>DELETE</span> <span>/products/:id</span></li>
+            </ul>
         </div>
     </section>
 </body>
